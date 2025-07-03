@@ -7,7 +7,7 @@
 
 Bienvenido a **El Buen Sabor**, una API RESTful para la gestión de reservas de restaurantes, construida con FastAPI y siguiendo los principios de la **Arquitectura Hexagonal**.
 
-##  архитектура  архитектура Arquitectura
+##  Arquitectura Hexagonal
 
 Este proyecto implementa la Arquitectura Hexagonal (también conocida como Puertos y Adaptadores) para separar claramente la lógica de negocio de las preocupaciones de la infraestructura.
 
