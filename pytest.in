@@ -1,0 +1,14 @@
+[pytest]
+# Directorio donde buscará las pruebas
+testpaths = tests
+
+# Ignorar advertencias de Pydantic V1/V2
+filterwarnings =
+    ignore:Field name "model_*" is reserved for properties of the model:UserWarning
+
+# Opciones para pytest-cov (cobertura de código)
+addopts =
+    --cov=src
+    --cov-report=term-missing
+    --cov-report=html
+    --cov-fail-under=80

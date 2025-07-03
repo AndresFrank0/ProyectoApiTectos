@@ -1,0 +1,42 @@
+services:
+  # Servicio de la API de FastAPI
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    # Le decimos a Docker que use nuestro archivo .env
+    env_file:
+      - .env
+    depends_on:
+      - db
+    command: >
+      sh -c "alembic upgrade head && 
+             uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  # Servicio de la Base de Datos PostgreSQL
+  db:
+    image: postgres:15-alpine
+    volumes:
+      # Esta es la única línea que debe haber en "volumes" para el servicio db
+      - postgres_data:/var/lib/postgresql/data/
+    # Esta es la forma correcta de cargar las variables de entorno
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+
+  # Servicio de pgAdmin para administrar la base de datos
+  pgadmin:
+    image: dpage/pgadmin4
+    env_file:
+      - .env
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+volumes:
+  # Volumen para persistir los datos de PostgreSQL
+  postgres_data:
